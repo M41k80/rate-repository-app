@@ -1,8 +1,8 @@
 import React from 'react';
-import Constants from 'expo-constants';
+import { Route, Routes, Navigate } from 'react-router-native';
 import { View, StyleSheet } from 'react-native';
 import RepositoryList from '../components/RepositoryList.js';
-import AppBar from '../components/AppBar.jsx';
+import AppBar  from '../components/AppBar.jsx';
 import theme from './theme.js';
 
 
@@ -20,8 +20,15 @@ const Main = () => {
     <View style={styles.container}>
       <AppBar />
       <RepositoryList />
+      
     </View>
   );
 };
 
 export default Main;
+
+
+// {/* <Routes>
+        // <Route path="/" element={<RepositoryList />} /> {/* Usa "element" en lugar de renderizar JSX directamente */}
+      //   <Route path="*" element={<Navigate to="/" />} />  {/* Asegúrate de usar un redireccionamiento adecuado */}
+      // </Routes> */}
