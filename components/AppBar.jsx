@@ -1,8 +1,9 @@
 
 import React from 'react';
-import { View, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, StyleSheet, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 import Constants from 'expo-constants';
 import theme from '../app/theme';
+import { useNavigation } from '@react-navigation/native';
 
 const styles = StyleSheet.create({
   container: {
@@ -10,7 +11,8 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.primary,
     padding: theme.spacing.medium,
     flexDirection: 'row', 
-    alignItems: 'center', 
+    alignItems: 'center',
+    justifyContent: 'space-around',
   },
   tab: {
     color: theme.colors.textLight, 
@@ -20,11 +22,21 @@ const styles = StyleSheet.create({
 });
 
 const AppBar = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <TouchableWithoutFeedback onPress={() => {}}>
-        <Text style={styles.tab}>Repositories</Text>
-      </TouchableWithoutFeedback>
+    
+      <TouchableOpacity style={styles.tab}
+        onPress={() => navigation.navigate('SignIn')}>
+          <Text style={styles.tab}>Sign In</Text>
+      </TouchableOpacity>
+    
+    
+      <TouchableOpacity style={styles.tab}
+        onPress={() => navigation.navigate('Repositories')}>
+          <Text style={styles.tab}>Repositories</Text>
+      </TouchableOpacity>
+    
     </View>
   );
 };
