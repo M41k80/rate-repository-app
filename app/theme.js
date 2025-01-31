@@ -9,6 +9,8 @@ export default {
       accent: '#ffd700',        
       black: '#000000',         
       lemonChiffon: '#fffacd',  
+      error: '#ff0000',         
+      success: '#00ff00',
     },
     fonts: {
       main: 'System',           
