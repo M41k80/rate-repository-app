@@ -4,6 +4,7 @@ import AppScreen from '../components/AppScreen';
 import SignIn from '../components/SignIn';
 import theme from './theme';
 import RepositoryList from '../components/RepositoryList';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 const Stack = createStackNavigator();
 
@@ -23,20 +24,16 @@ const Main = () => {
           fontWeight: 'bold',
           fontSize: theme.fontSizes.large,
         },
+        headerLeft: () => <Icon 
+        name="home" 
+        color="yellow" 
+        size={30} 
+        style={{ marginLeft: 110 }} />,
         }}
         />
+        <Stack.Screen name="Repositories" component={RepositoryList}/>
         <Stack.Screen name="SignIn" component={SignIn} />
-        <Stack.Screen name="Repositories" component={RepositoryList}
-        options={{title: 'Repositories',
-        headerStyle: {
-          backgroundColor: theme.colors.primary,
-        },
-        headerTintColor: theme.colors.textLight,
-        headerTitleStyle: {
-          fontWeight: 'bold',
-          fontSize: theme.fontSizes.large,
-        },
-        }} />
+        
         
         
       </Stack.Navigator>
