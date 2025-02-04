@@ -16,7 +16,7 @@ export default {
     },
     fonts: {
       main: Platform.select({
-        ios: 'Arial',
+        ios: 'Arial', // my platform
         android: 'Roboto',
         default: 'System',
       }),
