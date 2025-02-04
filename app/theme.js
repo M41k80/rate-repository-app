@@ -1,3 +1,5 @@
+import { Platform } from "react-native";
+
 export default {
     colors: {
       primary: '#0366d6',       
@@ -13,8 +15,16 @@ export default {
       success: '#00ff00',
     },
     fonts: {
-      main: 'System',           
-      heading: 'HelveticaNeue', 
+      main: Platform.select({
+        ios: 'Arial',
+        android: 'Roboto',
+        default: 'System',
+      }),
+      heading: Platform.select({
+        ios: 'Arial',
+        android: 'Roboto',
+        default: 'System',
+      }),
     },
     fontSizes: {
       small: 12,

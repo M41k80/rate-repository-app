@@ -7,7 +7,10 @@ import * as Yup from 'yup';
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     padding: 20,
+    backgroundColor: theme.colors.secondary,
+    borderRadius: 5,
   },
   input: {
     height: 40,
@@ -15,7 +18,9 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     paddingHorizontal: 10,
     borderRadius: 5,
-  },
+    color: theme.colors.textLight,
+    
+  }
 });
 
 const validate = Yup.object().shape({
@@ -31,6 +36,7 @@ const SignIn = () => {
     console.log(values);
   };
   return (
+    
     <Formik
       initialValues={{ username: '', password: '' }}
       validationSchema={validate}
