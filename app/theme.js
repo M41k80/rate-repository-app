@@ -21,7 +21,7 @@ export default {
         default: 'System',
       }),
       heading: Platform.select({
-        ios: 'Arial',
+        ios: 'Arial', // my platform
         android: 'Roboto',
         default: 'System',
       }),
