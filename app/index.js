@@ -5,12 +5,18 @@ import SignIn from '../components/SignIn';
 import theme from './theme';
 import RepositoryList from '../components/RepositoryList';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { ApolloProvider } from '@apollo/client';
+import client  from '../utils/apolloClient';
 
 const Stack = createStackNavigator();
+
+
+
 
 const Main = () => {
   return (
     
+    <ApolloProvider client={client}>
       <Stack.Navigator>
         <Stack.Screen 
         name="Home"
@@ -37,6 +43,7 @@ const Main = () => {
         
         
       </Stack.Navigator>
+    </ApolloProvider>
     
   );
 };

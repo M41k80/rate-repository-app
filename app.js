@@ -1,9 +1,23 @@
 import React from "react";
 import Main from "./app/index";
+import { ApolloProvider } from "@apollo/client";
+import client from '../utils/apolloClient';
 
-export default function App() {
-  return <Main />;
-}
+
+
+
+const App = () => {
+  return ( 
+    // <ApolloProvider client={client}>
+    //    <Main />
+    // </ApolloProvider>
+    <Main />
+     
+  
+    );
+};
+
+export default App;
 
 // import React from 'react';
 // import { NativeRouter } from 'react-router-native'; 
