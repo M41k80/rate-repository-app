@@ -7,6 +7,7 @@ import RepositoryList from '../components/RepositoryList';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { ApolloProvider } from '@apollo/client';
 import client  from '../utils/apolloClient';
+import Constants from 'expo-constants';
 
 const Stack = createStackNavigator();
 
@@ -15,7 +16,7 @@ const Stack = createStackNavigator();
 
 const Main = () => {
   return (
-    
+    console.log(Constants.expoConfig.extra.env),
     <ApolloProvider client={client}>
       <Stack.Navigator>
         <Stack.Screen 
