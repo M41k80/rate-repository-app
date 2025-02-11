@@ -7,10 +7,9 @@ import { Formik } from 'formik';
 import FormikTextInput from './FormikTextInput';
 import * as Yup from 'yup';
 import useSignIn from '../hooks/useSignIn';
-<<<<<<< HEAD
-=======
+
 import AuthStorageContext from '../contexts/AuthStorageContext';
->>>>>>> part3
+
 
 const styles = StyleSheet.create({
   container: {
@@ -37,8 +36,7 @@ const validate = Yup.object().shape({
 
 const SignIn = () => {
   const [signIn] = useSignIn();
-<<<<<<< HEAD
-=======
+
   const authStorage = useContext(AuthStorageContext);
   const  navigation  = useNavigation();
 
@@ -51,7 +49,6 @@ const SignIn = () => {
     };
     checkToken();
   }, []);
->>>>>>> part3
 
   const onSubmit = async (values) => {
     const { username, password } = values;
@@ -60,12 +57,11 @@ const SignIn = () => {
       const data = await signIn({ username, password });
       if (data) {
         console.log('data from signIn', data);
-<<<<<<< HEAD
-=======
+
         await authStorage.setAccessToken(data.authenticate.accessToken);
         console.log('accessToken:', data.authenticate.accessToken);
         navigation.navigate('Repositories'); 
->>>>>>> part3
+
       } else {
         console.log('No data from signIn');
       }
