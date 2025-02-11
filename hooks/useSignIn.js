@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 import { useMutation, gql } from '@apollo/client';
+=======
+import { useMutation, gql, useApolloClient } from '@apollo/client';
+import AuthStorageContext from '../contexts/AuthStorageContext';
+import { useContext } from 'react';
+import { useNavigation } from '@react-navigation/native';
+>>>>>>> part3
 
 const Authenticate = gql`
   mutation authenticate($credentials: AuthenticateInput!) {
@@ -15,6 +22,7 @@ const Authenticate = gql`
 
 const useSignIn = () => {
     const [mutate, result] = useMutation(Authenticate);
+<<<<<<< HEAD
 
     const signIn = async ({ username, password }) => {
         try {
@@ -47,3 +55,40 @@ const useSignIn = () => {
     };
 
 export default useSignIn;
+=======
+    const authStorage = useContext(AuthStorageContext) //instance of AuthStorage
+    const apolloClient = useApolloClient();
+    const navigation = useNavigation();
+
+
+    const signIn = async ({ username, password }) => {
+        try {
+          const { data } = await mutate({
+            variables: { credentials: { username, password } },
+          });
+    
+          if (data && data.authenticate) {
+            const { accessToken } = data.authenticate;
+    
+            // save the access token
+            await authStorage.setAccessToken(accessToken);
+    
+            // Reset the Apollo Client store
+            await apolloClient.resetStore();
+    
+            // Navigate to the Repositories screen
+            navigation.navigate('Repositories');
+          }
+    
+          return data;
+        } catch (error) {
+          console.error('Error during sign in:', error);
+          return null;
+        }
+      };
+    
+      return [signIn, result];
+    };
+
+export default useSignIn;
+>>>>>>> part3

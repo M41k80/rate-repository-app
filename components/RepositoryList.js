@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { ActivityIndicator, Text } from 'react-native';
+import { ActivityIndicator, Text , TouchableOpacity} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import useSignOut from '../hooks/useSignOut';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import { FlatList, View, StyleSheet } from 'react-native';
 import RepositoryItem from './RepositoryIteam';
 import theme from '../app/theme';
@@ -17,6 +20,13 @@ const styles = StyleSheet.create({
   separator: {
     height: 5,
   },
+  tab: {
+    color: theme.colors.textLight,
+    fontSize: 16,
+    padding: 10,
+    marginHorizontal: 8,
+    fontWeight: 'bold',
+  },
 });
 
 
@@ -25,6 +35,12 @@ const ItemSeparator = () => <View style={styles.separator} />;
 
 const RepositoryList = () => {
   const { repositories, loading, error } = useRepositories();
+  const signOut = useSignOut();
+  const navigation = useNavigation();
+  const handleSignOut = async () => {
+    await signOut();
+    navigation.navigate('SignIn');
+  };
   
 
   if (loading) return <ActivityIndicator size="large" color={theme.colors.primary} />;
@@ -37,6 +53,10 @@ const RepositoryList = () => {
 
   return (
     <View style={styles.container}>
+    <TouchableOpacity onPress={handleSignOut}>
+          <Icon name="sign-out-alt"  style={styles.tab} />
+            <Text style={styles.tab}>Sign Out</Text>
+        </TouchableOpacity>
        <FlatList
       data={repositoryNodes}
       renderItem={({ item }) => <RepositoryItem repository={item} />}
