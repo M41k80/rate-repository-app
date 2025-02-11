@@ -1,43 +1,55 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import theme from '../app/theme';
+
+const formatNumber = (number) => {
+  if (number >= 1000) {
+    return `${(number / 1000).toFixed(1)}k`;
+  }
+  return number.toString();
+};
 const RepositoryItem = ({ repository }) => {
   return (
-    <View style={styles.container}>
-      {/* Contenedor de imagen y texto (Avatar y nombre, descripción, lenguaje) */}
-      <View style={styles.header}>
-        <Image
-          style={styles.avatar}
-          source={{ uri: repository.ownerAvatarUrl }}
-        />
-        <View style={styles.headerText}>
-          <Text style={styles.name}>{repository.fullName}</Text>
-          <Text style={styles.description}>{repository.description}</Text>
-          <Text style={styles.language}>{repository.language}</Text>
-        </View>
-      </View>
-      
-      {/* Contenedor de las estadísticas */}
-      <View style={styles.stats}>
-        <View style={styles.statItem}>
-          <Text style={styles.statValue}>{repository.stargazersCount}</Text>
-          <Text style={styles.statLabel}>Stars</Text>
-        </View>
-        <View style={styles.statItem}>
-          <Text style={styles.statValue}>{repository.forksCount}</Text>
-          <Text style={styles.statLabel}>Forks</Text>
-        </View>
-        <View style={styles.statItem}>
-          <Text style={styles.statValue}>{repository.ratingAverage}</Text>
-          <Text style={styles.statLabel}>Rating</Text>
-        </View>
-        <View style={styles.statItem}>
-          <Text style={styles.statValue}>{repository.reviewCount}</Text>
-          <Text style={styles.statLabel}>Reviews</Text>
-        </View>
+    <View style={styles.container} testID="repositoryItem">
+    {/* Contenedor de imagen y texto (Avatar y nombre, descripción, lenguaje) */}
+    <View style={styles.header}>
+      <Image
+        style={styles.avatar}
+        source={{ uri: repository.ownerAvatarUrl }}
+        testID="avatar"
+      />
+      <View style={styles.headerText}>
+        <Text style={styles.name} testID="fullName">{repository.fullName}</Text>
+        <Text style={styles.description} testID="description">{repository.description}</Text>
+        <Text style={styles.language} testID="language">{repository.language}</Text>
       </View>
     </View>
-  );
+    
+    {/* Contenedor de las estadísticas */}
+    <View style={styles.stats}>
+      <View style={styles.statItem} testID="stars">
+        <Text style={styles.statValue} testID="stargazersCount">
+        {formatNumber(repository.stargazersCount)}
+        </Text>
+        <Text style={styles.statLabel}>Stars</Text>
+      </View>
+      <View style={styles.statItem} testID="forks">
+        <Text style={styles.statValue} testID="forksCount">
+        {formatNumber(repository.forksCount)}
+        </Text>
+        <Text style={styles.statLabel}>Forks</Text>
+      </View>
+      <View style={styles.statItem} testID="rating">
+        <Text style={styles.statValue} testID="ratingAverage">{repository.ratingAverage}</Text>
+        <Text style={styles.statLabel}>Rating</Text>
+      </View>
+      <View style={styles.statItem} testID="reviews">
+        <Text style={styles.statValue} testID="reviewCount">{repository.reviewCount}</Text>
+        <Text style={styles.statLabel}>Reviews</Text>
+      </View>
+    </View>
+  </View>
+);
 };
 
 const styles = StyleSheet.create({
