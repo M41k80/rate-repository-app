@@ -6,46 +6,59 @@ import theme from './theme';
 import RepositoryList from '../components/RepositoryList';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { ApolloProvider } from '@apollo/client';
-import client  from '../utils/apolloClient';
 import Constants from 'expo-constants';
+import AuthStorage from '../utils/authStorage';
+import AuthStorageContext  from '../contexts/AuthStorageContext';
+import createApolloClient from '../utils/apolloClient';
+
+
+
+const authStorage = new AuthStorage();
+const apolloClient = createApolloClient(authStorage);
+
+
 
 const Stack = createStackNavigator();
 
-
-
-
 const Main = () => {
+  React.useEffect(() => {
+    console.log(Constants.expoConfig.extra.env);
+  }, []);
+
   return (
-    console.log(Constants.expoConfig.extra.env),
-    <ApolloProvider client={client}>
+    <ApolloProvider client={apolloClient}>
+      <AuthStorageContext.Provider value={authStorage}>
       <Stack.Navigator>
-        <Stack.Screen 
-        name="Home"
-        component={AppScreen} 
-        options={{title: 'Home',
-        headerStyle: {
-          backgroundColor: theme.colors.primary,
-        },
-        headerTintColor: theme.colors.textLight,
-        headerTitleStyle: {
-          fontWeight: 'bold',
-          fontSize: theme.fontSizes.large,
-        },
-        headerLeft: () => <Icon 
-        name="home" 
-        color="yellow" 
-        size={30} 
-        style={{ marginLeft: 110 }} />,
-        }}
-        />
-        <Stack.Screen name="Repositories" component={RepositoryList}/>
+        {/* <Stack.Screen
+          name="Home"
+          component={AppScreen}
+          options={{
+            title: 'Home',
+            headerStyle: {
+              backgroundColor: theme.colors.primary,
+            },
+            headerTintColor: theme.colors.textLight,
+            headerTitleStyle: {
+              fontWeight: 'bold',
+              fontSize: theme.fontSizes.large,
+            },
+            headerLeft: () => (
+              <Icon
+                name="home"
+                color="yellow"
+                size={30}
+                style={{ marginLeft: 110 }}
+              />
+            ),
+          }}
+        /> */}
         <Stack.Screen name="SignIn" component={SignIn} />
-        
+        <Stack.Screen name="Repositories" component={RepositoryList} />
         
         
       </Stack.Navigator>
+      </AuthStorageContext.Provider>
     </ApolloProvider>
-    
   );
 };
 
