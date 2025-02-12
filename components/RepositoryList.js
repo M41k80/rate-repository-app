@@ -42,14 +42,14 @@ const RepositoryList = () => {
     navigation.navigate('SignIn');
   };
   
+  const handleRepositoryPress = (id) => {
+    navigation.navigate('Repository', { id }); // Navega a la vista del repositorio
+  };
 
   if (loading) return <ActivityIndicator size="large" color={theme.colors.primary} />;
   if (error) return <Text>Error: {error.message}</Text>;
-  console.log(repositories); // to see if the data is already loaded
 
-
-
-  const repositoryNodes = repositories.edges.map(edge => edge.node);
+  const repositoryNodes = repositories.edges.map((edge) => edge.node);
 
   return (
     <View style={styles.container}>
@@ -57,12 +57,16 @@ const RepositoryList = () => {
           <Icon name="sign-out-alt"  style={styles.tab} />
             <Text style={styles.tab}>Sign Out</Text>
         </TouchableOpacity>
-       <FlatList
-      data={repositoryNodes}
-      renderItem={({ item }) => <RepositoryItem repository={item} />}
-      keyExtractor={(item) => item.id.toString()}
-      ItemSeparatorComponent={ItemSeparator}
-    />
+        <FlatList
+        data={repositoryNodes}
+        renderItem={({ item }) => (
+          <TouchableOpacity onPress={() => handleRepositoryPress(item.id)}>
+            <RepositoryItem repository={item} />
+          </TouchableOpacity>
+        )}
+        keyExtractor={(item) => item.id.toString()}
+        ItemSeparatorComponent={ItemSeparator}
+      />
     </View>
    
   );

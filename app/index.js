@@ -10,6 +10,7 @@ import Constants from 'expo-constants';
 import AuthStorage from '../utils/authStorage';
 import AuthStorageContext  from '../contexts/AuthStorageContext';
 import createApolloClient from '../utils/apolloClient';
+import RepositoryView from '../components/ReposirotyView';
 
 
 
@@ -54,6 +55,7 @@ const Main = () => {
         /> */}
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="Repositories" component={RepositoryList} />
+        <Stack.Screen name="Repository" component={RepositoryView} />
         
         
       </Stack.Navigator>

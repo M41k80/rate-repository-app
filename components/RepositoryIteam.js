@@ -2,13 +2,16 @@ import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import theme from '../app/theme';
 
-const formatNumber = (number) => {
-  if (number >= 1000) {
-    return `${(number / 1000).toFixed(1)}k`;
-  }
-  return number.toString();
-};
+// const formatNumber = (number) => {
+//   if (number >= 1000) {
+//     return `${(number / 1000).toFixed(1)}k`;
+//   }
+//   return number.toString();
+// }; only for testing
 const RepositoryItem = ({ repository }) => {
+  if (!repository) {
+    return <Text>No repository found</Text>;
+}
   return (
     <View style={styles.container} testID="repositoryItem">
     {/* Contenedor de imagen y texto (Avatar y nombre, descripción, lenguaje) */}
@@ -29,13 +32,15 @@ const RepositoryItem = ({ repository }) => {
     <View style={styles.stats}>
       <View style={styles.statItem} testID="stars">
         <Text style={styles.statValue} testID="stargazersCount">
-        {formatNumber(repository.stargazersCount)}
+        {repository.stargazersCount}
+        {/* {formatNumber(repository.stargazersCount)} */} 
         </Text>
         <Text style={styles.statLabel}>Stars</Text>
       </View>
       <View style={styles.statItem} testID="forks">
         <Text style={styles.statValue} testID="forksCount">
-        {formatNumber(repository.forksCount)}
+        {repository.forksCount}
+        {/* {formatNumber(repository.forksCount)} */} 
         </Text>
         <Text style={styles.statLabel}>Forks</Text>
       </View>
