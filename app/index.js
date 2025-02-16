@@ -10,7 +10,8 @@ import Constants from 'expo-constants';
 import AuthStorage from '../utils/authStorage';
 import AuthStorageContext  from '../contexts/AuthStorageContext';
 import createApolloClient from '../utils/apolloClient';
-import RepositoryView from '../components/ReposirotyView';
+import RepositoryView from '../components/RepositoryView';
+import ReviewForm from '../components/ReviewForm';
 
 
 
@@ -30,7 +31,7 @@ const Main = () => {
     <ApolloProvider client={apolloClient}>
       <AuthStorageContext.Provider value={authStorage}>
       <Stack.Navigator>
-        {/* <Stack.Screen
+        <Stack.Screen
           name="Home"
           component={AppScreen}
           options={{
@@ -52,10 +53,11 @@ const Main = () => {
               />
             ),
           }}
-        /> */}
+        />
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="Repositories" component={RepositoryList} />
         <Stack.Screen name="Repository" component={RepositoryView} />
+        <Stack.Screen name="ReviewForm" component={ReviewForm} />
         
         
       </Stack.Navigator>

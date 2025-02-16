@@ -43,7 +43,7 @@ const AppBar = () => {
 
    
     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-    {/* <View style={styles.container}>
+    <View style={styles.container}>
     
     
       <TouchableOpacity style={styles.tab}
@@ -52,15 +52,15 @@ const AppBar = () => {
           <Text style={styles.tab}>Sign In</Text>
       </TouchableOpacity>
 
-      </View> */}
-      <View style={styles.container}>
+      </View>
+      {/* <View style={styles.container}>
     
     
-    {/* <TouchableOpacity style={styles.tab}
+    <TouchableOpacity style={styles.tab}
       onPress={() => navigation.navigate('Repositories')}>
       <Icon name="list"  style={styles.tab} />
         <Text style={styles.tab}>Repositories</Text>
-    </TouchableOpacity> */}
+    </TouchableOpacity>
     {data && data.me ? ( <TouchableOpacity onPress={handleSignOut}>
       <Icon name="sign-out-alt"  style={styles.tab} />
         <Text style={styles.tab}>Sign Out</Text>
@@ -70,9 +70,16 @@ const AppBar = () => {
         <Icon name="sign-in-alt"  style={styles.tab} />
         <Text style={styles.tab}>Sign In</Text>
       </TouchableOpacity>
+      
     ) }
     
   
+  </View> */}
+  <View style={styles.container}>
+    <TouchableOpacity onPress={() => navigation.navigate('ReviewForm')}>
+      <Icon name="list"  style={styles.tab} />
+      <Text style={styles.tab}>ReviewForm</Text>
+    </TouchableOpacity>
   </View>
  
   
