@@ -49,7 +49,9 @@ const RepositoryView = ({ route }) => {
     return <Text>No repository found</Text>;
   }
 
-  const reviews = repository.reviews.edges.map((edge) => edge.node);
+  const reviews = repository.reviews.edges
+    .map((edge) => edge.node)
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
   const handleOpenInGitHub = () => {
     Linking.openURL(repository.url); // Open the repository URL in the default browser
