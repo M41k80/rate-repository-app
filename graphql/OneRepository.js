@@ -13,7 +13,7 @@ export const GET_REPOSITORY = gql`
       reviewCount
       ownerAvatarUrl
       url
-      reviews(orderBy: CREATED_AT, orderDirection: DESC) {
+      reviews(first: 10) {
         edges {
           node {
             id

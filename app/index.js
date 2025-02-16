@@ -12,6 +12,9 @@ import AuthStorageContext  from '../contexts/AuthStorageContext';
 import createApolloClient from '../utils/apolloClient';
 import RepositoryView from '../components/RepositoryView';
 import ReviewForm from '../components/ReviewForm';
+import SignUpForm from '../components/SignUpForm';
+import OrderPicker from '../components/OrderPicker';
+import { Provider as PaperProvider } from 'react-native-paper';
 
 
 
@@ -28,6 +31,7 @@ const Main = () => {
   }, []);
 
   return (
+    <PaperProvider>
     <ApolloProvider client={apolloClient}>
       <AuthStorageContext.Provider value={authStorage}>
       <Stack.Navigator>
@@ -58,11 +62,14 @@ const Main = () => {
         <Stack.Screen name="Repositories" component={RepositoryList} />
         <Stack.Screen name="Repository" component={RepositoryView} />
         <Stack.Screen name="ReviewForm" component={ReviewForm} />
+        <Stack.Screen name="SignUp" component={SignUpForm} />
+        <Stack.Screen name="OrderPick" component={OrderPicker} />
         
         
       </Stack.Navigator>
       </AuthStorageContext.Provider>
     </ApolloProvider>
+    </PaperProvider>
   );
 };
 

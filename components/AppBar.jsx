@@ -76,9 +76,9 @@ const AppBar = () => {
   
   </View> */}
   <View style={styles.container}>
-    <TouchableOpacity onPress={() => navigation.navigate('ReviewForm')}>
+    <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
       <Icon name="list"  style={styles.tab} />
-      <Text style={styles.tab}>ReviewForm</Text>
+      <Text style={styles.tab}>Sign Up</Text>
     </TouchableOpacity>
   </View>
  
