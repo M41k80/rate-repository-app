@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Button, Linking, StyleSheet, ActivityIndicator, TouchableOpacity, FlatList, ScrollView} from 'react-native';
 import { useQuery } from '@apollo/client';
 import { GET_REPOSITORY } from '../graphql/OneRepository';
@@ -32,8 +32,11 @@ const RepositoryView = ({ route }) => {
   console.log(`RepositoryView id: ${id}`);
   const navigation = useNavigation();
 
-  const { data, loading, error } = useQuery(GET_REPOSITORY, {
-    variables: { id },
+  const [cursor, setCursor] = useState("");
+  const [reviews, setReviews] = useState([]);
+
+  const { data, loading, error, fetchMore } = useQuery(GET_REPOSITORY, {
+    variables: { id, first: 5, after: cursor },
     fetchPolicy: 'cache-and-network',
   });
 
@@ -49,7 +52,7 @@ const RepositoryView = ({ route }) => {
     return <Text>No repository found</Text>;
   }
 
-  const reviews = repository.reviews.edges.map((edge) => edge.node);
+  // const reviews = repository.reviews.edges.map((edge) => edge.node);
 
   const handleOpenInGitHub = () => {
     Linking.openURL(repository.url); // Open the repository URL in the default browser
@@ -63,6 +66,29 @@ const RepositoryView = ({ route }) => {
       repositoryName, // Pasa el repositoryName
     });
   };
+
+
+  const handleLoadMore = () => {
+    if (data?.repository?.reviews?.pageInfo?.hasNextPage) {
+      const nextCursor = data.repository.reviews.pageInfo.endCursor;
+
+    fetchMore({
+      variables: {
+        id,
+        first: 10,
+        after: nextCursor,
+      },
+    }).then(( result ) => {
+      setReviews((prevReviews) => [
+        ...prevReviews,
+        ...result.data.repository.reviews.edges.map((edge) => edge.node),
+      ]);
+      setCursor(result.data.repository.reviews.pageInfo.endCursor);
+    });
+
+    }
+  };
+      
 
   return (
     <View style={styles.container}>
@@ -86,11 +112,15 @@ const RepositoryView = ({ route }) => {
       
      
    
-      <FlatList style={styles.listContainer}
-      data={reviews}
-      renderItem={({ item }) => <ReviewItem review={item} />}
-      keyExtractor={({ id }) => id}
-    />
+      <FlatList
+        style={styles.listContainer}
+        data={[...reviews, ...repository.reviews.edges.map((edge) => edge.node)]} // Concatenar las reseñas actuales con las nuevas
+        renderItem={({ item }) => <ReviewItem review={item} />}
+        keyExtractor={({ id }) => id}
+        onEndReached={handleLoadMore} // Trigger para cargar más reseñas
+        onEndReachedThreshold={0.5} // Umbral para detectar cuándo se ha llegado al final (50% de la lista)
+        ListFooterComponent={loading ? <ActivityIndicator size="small" color={theme.colors.primary} /> : null} // Mostrar indicador de carga mientras se traen más reseñas
+      />
     </View>
     
     

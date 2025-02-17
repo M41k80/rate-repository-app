@@ -15,6 +15,7 @@ import ReviewForm from '../components/ReviewForm';
 import SignUpForm from '../components/SignUpForm';
 import OrderPicker from '../components/OrderPicker';
 import { Provider as PaperProvider } from 'react-native-paper';
+import MyReviews from '../components/MyReviews';
 
 
 
@@ -64,6 +65,7 @@ const Main = () => {
         <Stack.Screen name="ReviewForm" component={ReviewForm} />
         <Stack.Screen name="SignUp" component={SignUpForm} />
         <Stack.Screen name="OrderPick" component={OrderPicker} />
+        <Stack.Screen name="MyReviews" component={MyReviews} />
         
         
       </Stack.Navigator>

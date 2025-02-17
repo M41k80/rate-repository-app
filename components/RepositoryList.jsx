@@ -40,6 +40,10 @@ class RepositoryListContainer extends React.Component {
             <Icon name="home" style={styles.tab} />
             <Text style={styles.tab}>Home</Text>
           </TouchableOpacity>
+          <TouchableOpacity onPress={this.props.onMyReviewsPress}>
+            <Icon name="user-edit" style={styles.tab} />
+            <Text style={styles.tab}>My Reviews</Text>
+          </TouchableOpacity>
         </ScrollView>
         <OrderPicker
           selectedOrder={this.props.selectedOrder}
@@ -110,6 +114,11 @@ const RepositoryList = () => {
     navigation.navigate('Home');
   };
 
+  const handleMyReviewsPress = () => {
+    navigation.navigate('MyReviews');
+  };
+
+
   const handleRepositoryPress = (id) => {
     navigation.navigate('Repository', { id });
   };
@@ -138,6 +147,7 @@ const RepositoryList = () => {
       onSignOut={handleSignOut}
       onHomePress={handleHomePress}
       onRepositoryPress={handleRepositoryPress}
+      onMyReviewsPress={handleMyReviewsPress}
     />
   );
 };

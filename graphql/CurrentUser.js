@@ -1,18 +1,11 @@
 import { gql } from '@apollo/client';
 
-export const GET_REPOSITORY = gql`
-  query GetRepository($id: ID!, $first: Int, $after: String) {
-    repository(id: $id) {
+export const GET_CURRENT_USER = gql`
+  query getCurrentUser($includeReviews: Boolean = false, $first: Int, $after: String) {
+    me {
       id
-      fullName
-      description
-      language
-      forksCount
-      stargazersCount
-      reviewCount
-      ratingAverage
-      ownerAvatarUrl
-      reviews(first: $first, after: $after) {
+      username
+      reviews(first: $first, after: $after) @include(if: $includeReviews) {
         totalCount
         edges {
           node {

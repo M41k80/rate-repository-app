@@ -12,8 +12,8 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 const styles = StyleSheet.create({
   container: {
     backgroundColor: theme.colors.primary,
-    height: 100,
-    width: '150',
+    height: 90,
+    width: '100',
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 10,
@@ -81,6 +81,7 @@ const AppBar = () => {
       <Text style={styles.tab}>Sign Up</Text>
     </TouchableOpacity>
   </View>
+  
  
   
 
