@@ -12,6 +12,7 @@ export const GET_REPOSITORY = gql`
       reviewCount
       ratingAverage
       ownerAvatarUrl
+      url
       reviews(first: $first, after: $after) {
         totalCount
         edges {
