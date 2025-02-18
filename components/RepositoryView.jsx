@@ -59,11 +59,11 @@ const RepositoryView = ({ route }) => {
   };
 
   const handleReviewForm = () => {
-    const [ownerName, repositoryName] = repository.fullName.split('/'); // Divide el fullName
+    const [ownerName, repositoryName] = repository.fullName.split('/'); 
     navigation.navigate('ReviewForm', {
       repositoryId: repository.id,
-      ownerName, // Pasa el ownerName
-      repositoryName, // Pasa el repositoryName
+      ownerName, 
+      repositoryName, 
     });
   };
 
@@ -114,12 +114,12 @@ const RepositoryView = ({ route }) => {
    
       <FlatList
         style={styles.listContainer}
-        data={[...reviews, ...repository.reviews.edges.map((edge) => edge.node)]} // Concatenar las reseñas actuales con las nuevas
+        data={[...reviews, ...repository.reviews.edges.map((edge) => edge.node)]} 
         renderItem={({ item }) => <ReviewItem review={item} />}
         keyExtractor={({ id }) => id}
-        onEndReached={handleLoadMore} // Trigger para cargar más reseñas
-        onEndReachedThreshold={0.5} // Umbral para detectar cuándo se ha llegado al final (50% de la lista)
-        ListFooterComponent={loading ? <ActivityIndicator size="small" color={theme.colors.primary} /> : null} // Mostrar indicador de carga mientras se traen más reseñas
+        onEndReached={handleLoadMore} 
+        onEndReachedThreshold={0.5} 
+        ListFooterComponent={loading ? <ActivityIndicator size="small" color={theme.colors.primary} /> : null} 
       />
     </View>
     

@@ -17,6 +17,18 @@ export const GET_CURRENT_USER = gql`
               id
               username
             }
+            repository {
+              id
+              fullName
+              description
+              language
+              forksCount
+              stargazersCount
+              reviewCount
+              ratingAverage
+              ownerAvatarUrl
+              url
+            }
           }
           cursor
         }
